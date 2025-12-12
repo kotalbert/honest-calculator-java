@@ -15,6 +15,9 @@ public class Main {
     private static final String MSG_7 = " ... very lazy";
     private static final String MSG_8 = " ... very, very lazy";
     private static final String MSG_9 = "You are";
+    public static final String MSG_10 = "Are you sure? It is only one digit! (y / n)";
+    public static final String MSG_11 = "Don't be silly! It's just one number! Add to the memory? (y / n)";
+    public static final String MSG_12 = "Last chance! Do you really want to embarrass yourself? (y / n)";
 
     /**
      * Checks if the given string represents an integer value, i.e. has no fractional part.
@@ -106,7 +109,22 @@ public class Main {
             System.out.println(MSG_4);
             String store = sc.nextLine();
             if (store.equals("y")) {
-                memory = result;
+                if (isOneDigit(Double.toString(result))) {
+                    for (int i = 10; i <= 12; i++) {
+                        System.out.println(switch (i) {
+                            case 10 -> MSG_10;
+                            case 11 -> MSG_11;
+                            case 12 -> MSG_12;
+                            default -> "";
+                        });
+                        String ans = sc.nextLine();
+                        if (ans.equals("n")) {
+                            break;
+                        }
+                    }
+                } else {
+                    memory = result;
+                }
             }
             System.out.println(MSG_5);
             String cont = sc.nextLine();
